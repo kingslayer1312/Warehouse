@@ -16,9 +16,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "items")
 public class ItemEntity {
     @Id
-    private int itemId;
+    private Integer itemId;
     private String itemName;
     private String description;
-    private int quantity;
-    private float price;
+    private Integer quantity;
+    private Float price;
 }
