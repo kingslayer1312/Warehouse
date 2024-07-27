@@ -7,6 +7,8 @@ import com.hrishi.warehouse.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ItemServiceImpl implements ItemService {
 
@@ -40,6 +42,12 @@ public class ItemServiceImpl implements ItemService {
                 .description(itemEntity.getDescription())
                 .quantity(itemEntity.getQuantity())
                 .price(itemEntity.getPrice()).build();
+    }
+
+    @Override
+    public Optional<Item> findById(Integer itemId) {
+        final Optional<ItemEntity> foundItem = itemRepository.findById(itemId);
+        return foundItem.map(item -> itemEntityToItem(item));
     }
 
 }

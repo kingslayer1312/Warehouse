@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class ItemController {
@@ -27,6 +26,13 @@ public class ItemController {
         item.setItemId(itemId);
         final Item savedItem = itemService.create(item);
         return new ResponseEntity<Item>(savedItem, HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "/items/{itemId}")
+    public ResponseEntity<Item> retrieveItem(@PathVariable final Integer itemId) {
+        final Optional<Item> foundItem = itemService.findById(itemId);
+        return foundItem.map(item -> new ResponseEntity(item, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
 }
