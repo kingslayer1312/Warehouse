@@ -5,7 +5,9 @@ import com.hrishi.warehouse.domain.ItemEntity;
 import com.hrishi.warehouse.repositories.ItemRepository;
 import com.hrishi.warehouse.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;

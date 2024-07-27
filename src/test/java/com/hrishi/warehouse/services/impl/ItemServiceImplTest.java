@@ -8,7 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
+import static com.hrishi.warehouse.TestData.testItem;
+import static com.hrishi.warehouse.TestData.testItemEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -23,20 +24,8 @@ public class ItemServiceImplTest {
 
     @Test
     public void testIfItemIsSaved() {
-        final Item item = Item.builder()
-                .itemId(101)
-                .itemName("Televisions")
-                .description("55 inch Plasma TV")
-                .quantity(120)
-                .price(1999.99F)
-                .build();
-        final ItemEntity itemEntity = ItemEntity.builder()
-                .itemId(101)
-                .itemName("Televisions")
-                .description("55 inch Plasma TV")
-                .quantity(120)
-                .price(1999.99F)
-                .build();
+        final Item item = testItem();
+        final ItemEntity itemEntity = testItemEntity();
 
         when(itemRepository.save(eq(itemEntity))).thenReturn(itemEntity);
 
